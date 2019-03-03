@@ -1,0 +1,31 @@
+<div class="tabs-content profile-tabs bg-light-primary py-5">
+  <div  class="pt-5">
+    <div  class="container pos-relative ng-star-inserted" infinitescroll="">
+      <div  class="row ng-star-inserted">
+        <div  class="col-12 col-lg-6 col-xl-4 h-300 ng-star-inserted py-3" *ngIf="authUserId == userId">
+          <div  class="upload-photo-btn d-flex flex-column justify-content-center align-items-center bg-light-secondary cur-pointer transition">
+            <div  class="upload-photo-img"></div>
+            <span  class="text-color-light">Upload photos</span>
+          </div>
+        </div>
+        <div  class="col-12 col-lg-6 col-xl-4 h-300 ng-star-inserted py-3" *ngFor='let image of images'>
+          <div (click)="showPhotoViewModal(image._id)" class="selfie-item pos-relative overflow-hidden cur-pointer text-color-white h-100">
+            <img  alt="" style="opacity: 1; transition: opacity 0.5s ease-in 0s;" [src]="image.url">
+            <div  class="selfie-item-overlay d-flex flex-column justify-content-between pos-absolute transition">
+              <div  class="overlay-top d-flex">
+                <button  class="btn-delete-photo ml-auto transition" *ngIf="authUserId == userId">
+                  <i  class="fa-icon fas fa-trash"></i>
+                </button>
+              </div>
+              <div  class="overlay-bottom">
+                <span  class="views-count mr-4">{{ image.views.length }}</span>
+                <span  class="likes-count">{{ image.likes.length }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-photo-view *ngIf="photoViewModalIsOpened" (onClose)="photoViewModalIsOpened = false" [imageId]="currentImageId"></app-photo-view>
