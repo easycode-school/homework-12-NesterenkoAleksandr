@@ -1,0 +1,64 @@
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CommentsService } from '../../services/comments.service';
+import { OnCommentAnswer } from '../../interfaces/OnCommentAnswer';
+import {MessageService} from 'primeng/api';
+
+@Component({
+  selector: 'app-comment',
+  templateUrl: './comment.component.html',
+  styleUrls: ['./comment.component.css']
+})
+export class CommentComponent implements OnInit {
+  /** Комментарий */
+  @Input() comment: Comment;
+
+  /** Идентификатор комментария к которому привязывается подкомментарий */
+  @Input() commentId: string;
+
+  /** Id авторизованого пользователя */
+  @Input() authUserId: string;
+
+  /** Событие "Комментарий удален" */
+  @Output() commentChanged: EventEmitter<any> = new EventEmitter();
+
+  // Вид операции ('edit' -редактирование комментария, 'add' - добавление комментария)
+  public changeMode: string;
+
+  constructor(private commentsService: CommentsService, private messageService: MessageService) { }
+
+  ngOnInit() { }
+
+  /**
+   * Удалить комментарий
+   * @param commentId - идентификатор комментария
+   * @param imageId - идентификатор изображения
+   */
+  public deleteComment(commentId: string, imageId: string) {
+    this.commentsService.deleteComment(commentId, imageId).subscribe(
+      (response: OnCommentAnswer) => {
+        this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
+        if (!response.error) {
+          this.commentChanged.emit();
+        }
+      },
+      (error) => this.messageService.add({severity: 'error', summary: 'Error Message:', detail: error.message})
+    );
+  }
+
+  /**
+   * Удалить подкмментарий
+   * @param commentId - идентификатор комментария
+   * @param subCommentId - идентификатор подкрмментария
+   */
+  public deleteSubComment(commentId: string, subCommentId: string) {
+    this.commentsService.deleteSubComment(commentId, subCommentId).subscribe(
+      (response: OnCommentAnswer) => {
+        this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
+        if (!response.error) {
+          this.commentChanged.emit();
+        }
+      },
+      (error) => this.messageService.add({severity: 'error', summary: 'Error Message:', detail: error.message})
+    );
+  }
+}

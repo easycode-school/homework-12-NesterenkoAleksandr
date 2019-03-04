@@ -205,34 +205,3 @@ img {
     min-height: 37px;
 }
 
-.btn.small-btn {
-    padding: 10px 20px;
-    font-size: 13px;
-}
-.btn.btn-border-gradient {
-    color: #fff;
-    background: linear-gradient(to right,#7303c0 0,#ec38bc 76%,#fa66cb 100%);
-}
-
-.btn {
-    position: relative;
-    display: inline-block;
-    padding: 15px 35px;
-    font-size: 16px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    text-align: center;
-    text-transform: uppercase;
-    border-radius: 500px;
-    z-index: 0;
-    overflow: hidden;
-}
-
-.modal.modal-view-photo .view-photo-wrap .right-side .write-comment #comment-area {
-    margin-top: 28px;
-    font-size: 12px;
-    line-height: 1;
-    resize: none;
-}
-
-

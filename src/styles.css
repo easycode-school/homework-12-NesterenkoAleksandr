@@ -136,5 +136,74 @@ textarea.form-control {
 
 .form-control:focus {
   border: 1px solid #7303c0;
-  height: 70px;
+}
+
+
+.btn.small-btn {
+  padding: 10px 20px;
+  font-size: 13px;
+}
+.btn.btn-border-gradient {
+  color: #fff;
+  background: linear-gradient(to right,#7303c0 0,#ec38bc 76%,#fa66cb 100%);
+}
+
+.btn.btn-border-gradient.disabled, 
+.btn.btn-border-gradient:disabled {
+  color: #969696;
+  background: linear-gradient(to right,#969696 0,#969696 100%);
+}
+
+.disabled .spinner-wrapper {
+  background-color: rgba(0,0,0,.08);
+}
+
+.btn.btn-border-gradient.disabled.btn-bg-gray::before, 
+.btn.btn-border-gradient.disabled.btn-bg-light::before, 
+.btn.btn-border-gradient:disabled.btn-bg-gray::before, 
+.btn.btn-border-gradient:disabled.btn-bg-light::before {
+  background-color: #ececec;
+}
+
+.btn.btn-border-gradient.btn-bg-light::before {
+  background-color: #fff;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border-radius: 500px;
+  z-index: -1;
+  opacity: 1;
+}
+
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 15px 35px;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 500px;
+  z-index: 0;
+  overflow: hidden;
+}
+
+#main .challenge-info .tabs-content #challenge-info-description .voting-data .voting-award::before,
+#main .challenge-info .tabs-content #challenge-info-description .voting-data .voting-time::before, 
+#main .challenge-info .tabs-content #challenge-info-description .voting-data .voting-votes::before, 
+.btn.btn-border-gradient.btn-bg-gray>*, 
+.btn.btn-border-gradient.btn-bg-light>*, 
+.gradient-text, 
+.txt-btn>* {
+  background: linear-gradient(to right,#7303c0 0,#ec38bc 76%,#fa66cb 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

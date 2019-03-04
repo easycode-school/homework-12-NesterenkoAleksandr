@@ -3,6 +3,8 @@ import { PhotoViewService } from '../../services/photo-view.service';
 import { Image } from '../../../user/interfaces/image';
 import { NgForm} from '@angular/forms';
 import { AuthGlobalService } from 'src/app/services/auth-global.service';
+import { OnServerAnswer } from '../../interfaces/OnServerAnswer';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-photo-view',
@@ -19,17 +21,23 @@ export class PhotoViewModalComponent implements OnInit {
   /** Id авторизованого пользователя */
   public authUserId: string;
 
-  constructor(private photoViewService: PhotoViewService, private auth: AuthGlobalService) { }
+  constructor(
+    private photoViewService: PhotoViewService,
+    private auth: AuthGlobalService,
+    private messageService: MessageService
+    ) { }
 
   ngOnInit() {
     this.authUserId = this.auth.getUserId;
     this.getImage();
   }
 
+  /**
+   * Получить изображение
+   */
   public getImage() {
     this.photoViewService.getImage(this.imageId).subscribe((image: Image) => {
       this.image = image;
-      console.log(this.image);
     });
   }
 
@@ -43,10 +51,15 @@ export class PhotoViewModalComponent implements OnInit {
   /**
    * Изменить заголовок и описание изображения
    */
-  public onSubmit() {  }
-
-  /**
-   * Добавить комментарий к изображению
-   */
-  public onAddComment() {  }
+  public onSubmit() {
+    this.photoViewService.editImageInfo(this.imageId, this.image.title, this.image.description).subscribe(
+      (response: OnServerAnswer) => {
+        this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
+        if (!response.error) {
+          this.getImage();
+        }
+      },
+      (error) => this.messageService.add({severity: 'error', summary: 'Error Message:', detail: error.message})
+    );
+  }
 }

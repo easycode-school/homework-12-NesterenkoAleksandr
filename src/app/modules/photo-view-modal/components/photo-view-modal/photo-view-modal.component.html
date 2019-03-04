@@ -52,7 +52,7 @@
             placeholder="Add image title" type="text" required>
 
             <textarea #description="ngModel" [(ngModel)]='image.description' id="description" name="description" formcontrolname="description"  class="transition ng-untouched ng-pristine ng-valid" 
-             placeholder="Add image description"></textarea>
+             placeholder="Add image description" required></textarea>
             <div  class="align-self-end">
               <button [disabled]='form.invalid || form.pristine' type="submit" class="btn btn-border-gradient btn-bg-light mt-2 small-btn">
                 <span  class="btn-wrapper">
@@ -61,24 +61,17 @@
               </button>
             </div>
           </form>
+
           <div class="comments-tree">
             <ng-container *ngFor="let comment of image?.comments">
-              <app-comment [comment]="comment" [authUserId]="authUserId" (commentDeleted)="getImage()"></app-comment>
+              <app-comment [comment]="comment" [authUserId]="authUserId" (commentChanged)="getImage()"></app-comment>
+              <ng-container *ngFor="let reply of comment.sub_comments">
+                <app-comment [comment]="reply" [authUserId]="authUserId" [commentId]="comment._id" (commentChanged)="getImage()"></app-comment>
+              </ng-container>
             </ng-container>
           </div> 
 
-          <form (ngSubmit)='onAddComment()' #formAddComment='ngForm' class="write-comment d-flex flex-column ng-untouched ng-pristine ng-valid " novalidate>
-            <textarea class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="comment" id="comment-area" name="comment-area" 
-            placeholder="Write a comment..."></textarea>
-            <div  class="align-self-end">
-              <button type="submit" class="btn btn-border-gradient btn-bg-light mt-2 small-btn disabled">
-                <span  class="btn-wrapper">
-                  <span >Submit</span>
-                  <span  class="pos-absolute spinner-wrapper "></span>
-                </span>
-              </button>
-            </div>
-          </form>
+          <app-form-comment [imageId]="imageId" (commentChanged)="getImage()"></app-form-comment>
         </div>
       </div>
     </div>

@@ -10,9 +10,11 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { HeaderModule } from './modules/header/header.module';
 import { FormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    // CommentComponent
   ],
   imports: [
     BrowserModule,
