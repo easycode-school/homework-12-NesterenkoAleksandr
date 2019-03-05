@@ -13,8 +13,7 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    // CommentComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
