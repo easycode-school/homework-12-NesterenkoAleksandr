@@ -9,6 +9,8 @@ import {MessageService} from 'primeng/api';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
+  @Input() isComment: boolean;
+
   /** Комментарий */
   @Input() comment: Comment;
 
@@ -21,12 +23,21 @@ export class CommentComponent implements OnInit {
   /** Событие "Комментарий удален" */
   @Output() commentChanged: EventEmitter<any> = new EventEmitter();
 
-  // Вид операции ('edit' -редактирование комментария, 'add' - добавление комментария)
-  public changeMode: string;
+  /** Признак того, что выполняется изменение комментария/подкомментария */
+  public isEdit: boolean;
+
+  /** Признак того, что выполняется добавление нового комментария/подкомментария */
+  public isAdd: boolean;
 
   constructor(private commentsService: CommentsService, private messageService: MessageService) { }
 
-  ngOnInit() { }
+  ngOnInit() {  }
+
+  /** Отмена добавления/изменения записи */
+  onCanceled() {
+    this.isEdit = false;
+    this.isAdd = false;
+  }
 
   /**
    * Удалить комментарий

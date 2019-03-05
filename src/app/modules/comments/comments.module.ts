@@ -4,10 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { CommentComponent } from './components/comment/comment.component';
 import { FormCommentComponent } from './components/form-comment/form-comment.component';
-import { FormSubcommentComponent } from './components/form-subcomment/form-subcomment.component';
 
 @NgModule({
-  declarations: [CommentComponent, FormCommentComponent, FormSubcommentComponent],
+  declarations: [CommentComponent, FormCommentComponent],
   imports: [
     CommonModule,
     FormsModule,

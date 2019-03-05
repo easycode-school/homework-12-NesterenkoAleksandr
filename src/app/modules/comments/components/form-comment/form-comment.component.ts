@@ -30,7 +30,28 @@ export class FormCommentComponent implements OnInit {
   constructor(private commentsService: CommentsService, private messageService: MessageService) { }
 
   ngOnInit() {
-    this.comment = Object.assign({}, this.comment);
+    this.comment = this.isEdit ? Object.assign({}, this.comment) : this.comment = Object.assign({});
+  }
+
+  /**
+   * Обработка события "click" элемента "Submit"
+   */
+  public onSubmit() {
+    if (this.commentId) {
+      // Подкомментарий
+      if (this.isEdit) {
+        this.editSubComment();       
+      }else {
+        this.addSubComment();
+      }
+    } else {
+      // Комментарий
+      if (this.isEdit) {
+        this.editComment();
+      }else {
+        this.addComment();
+      }
+    }
   }
 
   /**
@@ -42,6 +63,7 @@ export class FormCommentComponent implements OnInit {
         this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
 
         if (!response.error) {
+          this.comment = Object.assign({});
           this.commentChanged.emit();
         }
       },
@@ -58,6 +80,40 @@ export class FormCommentComponent implements OnInit {
         this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
 
         if (!response.error) {
+          this.comment = Object.assign({});
+          this.commentChanged.emit();
+        }
+      },
+      (error) => this.messageService.add({severity: 'error', summary: 'Error Message:', detail: error.message})
+    );
+  }
+
+   /**
+   * Добавление подкомментария
+   */
+  public addSubComment() {
+    this.commentsService.addSubComment(this.commentId, this.comment.text).subscribe(
+      (response: OnCommentAnswer) => {
+        this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
+        if (!response.error) {
+          this.comment = Object.assign({});
+          this.commentChanged.emit();
+        }
+      },
+      (error) => this.messageService.add({severity: 'error', summary: 'Error Message:', detail: error.message})
+    );
+  }
+
+  /**
+   * Изменение подкомментария
+   */
+  public editSubComment() {
+    this.commentsService.editSubComment(this.commentId, this.comment._id, this.comment.text).subscribe(
+      (response: OnCommentAnswer) => {
+        this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
+
+        if (!response.error) {
+          this.comment = Object.assign({});
           this.commentChanged.emit();
         }
       },

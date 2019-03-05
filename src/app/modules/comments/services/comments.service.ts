@@ -45,7 +45,6 @@ export class CommentsService {
    * @param comment - текст комментария
    */
   public addComment(imageId: string, comment: string): Observable<OnCommentAnswer> {
-    console.log('fff', imageId, comment);
     const httpHeaders = {
       headers: new HttpHeaders({
         'Content-type': 'application/json'
@@ -86,13 +85,16 @@ export class CommentsService {
     return this.http.put<OnCommentAnswer>(`${this.apiUrl}/public/users/comment/${commentId}`, { comment_text: comment }, httpHeaders);
   }
 
-  public editSubComment(commentId: string, comment: string): Observable<OnCommentAnswer> {
+  public editSubComment(commentId: string, subCommentId: string, subCommentText: string): Observable<OnCommentAnswer> {
     const httpHeaders = {
       headers: new HttpHeaders({
         'Content-type': 'application/json'
       })
     };
 
-    return this.http.put<OnCommentAnswer>(`${this.apiUrl}/public/users/comment/${commentId}`, { comment_text: comment }, httpHeaders);
+    return this.http.put<OnCommentAnswer>(`${this.apiUrl}/public/users/sub-comment/${commentId}`, {
+      comment_text: subCommentText,
+      sub_comment_id: subCommentId
+    }, httpHeaders);
   }
 }
