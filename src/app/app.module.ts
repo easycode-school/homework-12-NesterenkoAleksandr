@@ -11,7 +11,6 @@ import { HeaderModule } from './modules/header/header.module';
 import { FormsModule } from '@angular/forms';
 import { FooterModule } from './modules/footer/footer.module';
 
-
 @NgModule({
   declarations: [
     AppComponent

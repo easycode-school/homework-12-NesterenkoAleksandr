@@ -17,6 +17,7 @@ export class UserProfileImagesComponent implements OnInit {
   /** Массив изображений пользователя */
   public images: Image[];
 
+  public uploadPhotosModalIsOpened = false;
   public photoViewModalIsOpened = false;
 
   public currentImageId: string;
@@ -25,7 +26,15 @@ export class UserProfileImagesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUserImages(this.userId).subscribe((images: Image[]) => {
+    this.getImages();
+  }
+
+  /**
+   * Получить ac сервера фотографии пользователя
+   */
+  public getImages() {
+    this.userService.getUserImages(this.userId).subscribe(
+    (images: Image[]) => {
       this.images = images;
     });
   }

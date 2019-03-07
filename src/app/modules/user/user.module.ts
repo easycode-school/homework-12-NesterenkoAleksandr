@@ -8,6 +8,7 @@ import { UserProfileImagesComponent } from './components/user-profile-images/use
 import { UserProfileFavouritesComponent } from './components/user-profile-favourites/user-profile-favourites.component';
 import { UserProfileFollowsComponent } from './components/user-profile-follows/user-profile-follows.component';
 import { PhotoViewModalModule } from '../photo-view-modal/photo-view-modal.module';
+import { UploadPhotosModalModule } from '../upload-photos-modal/upload-photos-modal.module';
 
 @NgModule({
   declarations: [
@@ -19,8 +20,8 @@ import { PhotoViewModalModule } from '../photo-view-modal/photo-view-modal.modul
   imports: [
     CommonModule,
     UserRoutingModule,
-    PhotoViewModalModule
-
+    PhotoViewModalModule,
+    UploadPhotosModalModule
   ],
   providers: [UserService]
 })
