@@ -40,15 +40,15 @@ export class FormCommentComponent implements OnInit {
     if (this.commentId) {
       // Подкомментарий
       if (this.isEdit) {
-        this.editSubComment();       
-      }else {
+        this.editSubComment();
+      } else {
         this.addSubComment();
       }
     } else {
       // Комментарий
       if (this.isEdit) {
         this.editComment();
-      }else {
+      } else {
         this.addComment();
       }
     }
@@ -88,7 +88,7 @@ export class FormCommentComponent implements OnInit {
     );
   }
 
-   /**
+  /**
    * Добавление подкомментария
    */
   public addSubComment() {

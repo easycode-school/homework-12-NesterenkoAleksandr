@@ -9,6 +9,7 @@ import { MessageService } from 'primeng/api';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { HeaderModule } from './modules/header/header.module';
 import { FormsModule } from '@angular/forms';
+import { FooterModule } from './modules/footer/footer.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     ToastModule,
     HeaderModule,
-    FormsModule
+    FormsModule,
+    FooterModule
   ],
   providers: [MessageService, {
     provide: HTTP_INTERCEPTORS,
