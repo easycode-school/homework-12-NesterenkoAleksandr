@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { Image } from '../../user/interfaces/image';
-import { OnServerAnswer } from '../interfaces/OnServerAnswer';
+import { ServerResponse } from '../../../interfaces/server-response';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +27,8 @@ export class PhotoViewService {
    * @param imgTitle - заголовок изображения
    * @param imageDescription - описание изображения
    */
-  public editImageInfo(imageId: string, imgTitle: string, imageDescription: string): Observable<OnServerAnswer> {
+  public editImageInfo(imageId: string, imgTitle: string, imageDescription: string): Observable<ServerResponse> {
     const body = {description: imageDescription, title: imgTitle };
-    return this.http.put <OnServerAnswer>(`${this.apiUrl}/public/users/image-info/${imageId}`, body);
+    return this.http.put <ServerResponse>(`${this.apiUrl}/public/users/image-info/${imageId}`, body);
   }
 }

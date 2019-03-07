@@ -8,12 +8,12 @@
             <span  class="text-color-light">Upload photos</span>
           </div>
         </div>
-        <div  class="col-12 col-lg-6 col-xl-4 h-300 ng-star-inserted py-3" *ngFor='let image of images'>
+        <div class="col-12 col-lg-6 col-xl-4 h-300 ng-star-inserted py-3" *ngFor='let image of images'>
           <div (click)="showPhotoViewModal(image._id)" class="selfie-item pos-relative overflow-hidden cur-pointer text-color-white h-100">
-            <img  alt="" style="opacity: 1; transition: opacity 0.5s ease-in 0s;" [src]="image.url">
+            <img alt="" style="opacity: 1; transition: opacity 0.5s ease-in 0s;" [src]="image.url">
             <div  class="selfie-item-overlay d-flex flex-column justify-content-between pos-absolute transition">
               <div  class="overlay-top d-flex">
-                <button  class="btn-delete-photo ml-auto transition" *ngIf="authUserId == userId">
+                <button (click)="removeImage(image._id, image.url, $event); $event.stopPropagation();"  class="btn-delete-photo ml-auto transition" *ngIf="authUserId == userId">
                   <i  class="fa-icon fas fa-trash"></i>
                 </button>
               </div>

@@ -96,6 +96,10 @@ li {
   background-color: #e12ebc;
 }
 
+.active {
+  color: #e12ebc;
+}
+
 .h-300 {
   height: 300px;
 }

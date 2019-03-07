@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Image } from '../../interfaces/image';
 import { UserService } from '../../services/user.service';
+import { MessageService } from 'primeng/api';
+import { ServerResponse } from '../../../../interfaces/server-response';
 
 @Component({
   selector: 'app-user-profile-images',
@@ -22,7 +24,7 @@ export class UserProfileImagesComponent implements OnInit {
 
   public currentImageId: string;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -30,7 +32,7 @@ export class UserProfileImagesComponent implements OnInit {
   }
 
   /**
-   * Получить ac сервера фотографии пользователя
+   * Получить c сервера фотографии пользователя
    */
   public getImages() {
     this.userService.getUserImages(this.userId).subscribe(
@@ -39,9 +41,24 @@ export class UserProfileImagesComponent implements OnInit {
     });
   }
 
+  /**
+   * Открыть модальное окно
+   * @param imageId - идентификатор изображения
+   */
   public showPhotoViewModal(imageId: string) {
     this.currentImageId = imageId;
     this.photoViewModalIsOpened = true;
   }
 
+  public removeImage(imageId: string, imageUrl: string) {
+    this.userService.removeUserImage(this.userId, imageId, imageUrl).subscribe(
+    (response: ServerResponse) => {
+      this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
+      if (!response.error) {
+        this.getImages();
+      }
+    },
+    (error) => this.messageService.add({severity: 'error', summary: 'Error Message:', detail: error.message})
+    );
+  }
 }

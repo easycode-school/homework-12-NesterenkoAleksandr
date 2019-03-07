@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CommentsService } from '../../services/comments.service';
 import { Comment } from '../../interfaces/comment';
-import { OnCommentAnswer } from '../../interfaces/OnCommentAnswer';
 import {MessageService} from 'primeng/api';
+import { ServerResponse } from '../../../../interfaces/server-response';
 
 @Component({
   selector: 'app-form-comment',
@@ -59,7 +59,7 @@ export class FormCommentComponent implements OnInit {
    */
   public addComment() {
     this.commentsService.addComment(this.imageId, this.comment.text).subscribe(
-      (response: OnCommentAnswer) => {
+      (response: ServerResponse) => {
         this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
 
         if (!response.error) {
@@ -76,7 +76,7 @@ export class FormCommentComponent implements OnInit {
    */
   public editComment() {
     this.commentsService.editComment(this.comment._id, this.comment.text).subscribe(
-      (response: OnCommentAnswer) => {
+      (response: ServerResponse) => {
         this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
 
         if (!response.error) {
@@ -93,7 +93,7 @@ export class FormCommentComponent implements OnInit {
    */
   public addSubComment() {
     this.commentsService.addSubComment(this.commentId, this.comment.text).subscribe(
-      (response: OnCommentAnswer) => {
+      (response: ServerResponse) => {
         this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
         if (!response.error) {
           this.comment = Object.assign({});
@@ -109,7 +109,7 @@ export class FormCommentComponent implements OnInit {
    */
   public editSubComment() {
     this.commentsService.editSubComment(this.commentId, this.comment._id, this.comment.text).subscribe(
-      (response: OnCommentAnswer) => {
+      (response: ServerResponse) => {
         this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
 
         if (!response.error) {

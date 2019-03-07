@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommentsService } from '../../services/comments.service';
-import { OnCommentAnswer } from '../../interfaces/OnCommentAnswer';
 import {MessageService} from 'primeng/api';
+import { ServerResponse } from '../../../../interfaces/server-response';
 
 @Component({
   selector: 'app-comment',
@@ -46,7 +46,7 @@ export class CommentComponent implements OnInit {
    */
   public deleteComment(commentId: string, imageId: string) {
     this.commentsService.deleteComment(commentId, imageId).subscribe(
-      (response: OnCommentAnswer) => {
+      (response: ServerResponse) => {
         this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
         if (!response.error) {
           this.commentChanged.emit();
@@ -63,7 +63,7 @@ export class CommentComponent implements OnInit {
    */
   public deleteSubComment(commentId: string, subCommentId: string) {
     this.commentsService.deleteSubComment(commentId, subCommentId).subscribe(
-      (response: OnCommentAnswer) => {
+      (response: ServerResponse) => {
         this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
         if (!response.error) {
           this.commentChanged.emit();

@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { UploadPhotosService } from '../../services/upload-photos.service';
 import {MessageService} from 'primeng/api';
-import { OnServerAnswer } from '../../interfaces/OnServerAnswer';
+import { ServerResponse } from '../../../../interfaces/server-response';
 
 @Component({
   selector: 'app-upload-photos-modal',
@@ -48,7 +48,7 @@ export class UploadPhotosModalComponent implements OnInit {
    */
   public uploadPhotos() {
     this.uploadPhotosService.uploadPhotos(this.photosArray).subscribe(
-    (response: OnServerAnswer) => {
+    (response: ServerResponse) => {
       this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
       if (!response.error) {
         this.onUploadEnd.emit();

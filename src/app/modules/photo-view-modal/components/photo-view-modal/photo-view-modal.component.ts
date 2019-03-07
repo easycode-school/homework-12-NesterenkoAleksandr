@@ -3,8 +3,8 @@ import { PhotoViewService } from '../../services/photo-view.service';
 import { Image } from '../../../user/interfaces/image';
 import { NgForm} from '@angular/forms';
 import { AuthGlobalService } from 'src/app/services/auth-global.service';
-import { OnServerAnswer } from '../../interfaces/OnServerAnswer';
 import {MessageService} from 'primeng/api';
+import { ServerResponse } from '../../../../interfaces/server-response';
 
 @Component({
   selector: 'app-photo-view',
@@ -53,7 +53,7 @@ export class PhotoViewModalComponent implements OnInit {
    */
   public onSubmit() {
     this.photoViewService.editImageInfo(this.imageId, this.image.title, this.image.description).subscribe(
-      (response: OnServerAnswer) => {
+      (response: ServerResponse) => {
         this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
         if (!response.error) {
           this.getImage();
