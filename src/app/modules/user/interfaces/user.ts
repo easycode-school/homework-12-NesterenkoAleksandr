@@ -41,3 +41,14 @@ export interface User {
   register_date?: string;
   type?: string;
 }
+
+export interface Follows {
+  counts: number;
+  users: Array<{
+    avatar: string;
+    city: string;
+    cover: string;
+    full_name: string;
+    _id: string;
+  }>;
+}

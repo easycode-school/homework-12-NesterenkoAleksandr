@@ -8,7 +8,7 @@
         <a class="comment-author" [href]="'users/' + comment.owner._id">{{ comment.owner.full_name }}</a> {{ comment.text }} 
       </p>    
       <div class="comment-info d-flex justify-content-between align-items-center text-color-gray">
-        <span class="comment-date"> {{ comment.time_update | date : 'short' : 'UTC' | dateAgo}}</span>
+        <span class="comment-date"> {{ comment.time_update | date : 'short' | dateAgo}}</span>
         <div class="comment-control transition d-flex ">
           <i *ngIf="comment.owner._id == authUserId" (click)="isAdd = false; isEdit = true" class="btn-edit fa-icon fas fa-pen cur-pointer "></i>
           <i (click)="isAdd = true; isEdit = false" class="btn-reply fa-icon fas fa-reply cur-pointer ml-auto"></i>

@@ -13,8 +13,9 @@
             <img alt="" style="opacity: 1; transition: opacity 0.5s ease-in 0s;" [src]="image.url">
             <div  class="selfie-item-overlay d-flex flex-column justify-content-between pos-absolute transition">
               <div  class="overlay-top d-flex">
-                <button (click)="removeImage(image._id, image.url, $event); $event.stopPropagation();"  class="btn-delete-photo ml-auto transition" *ngIf="authUserId == userId">
-                  <i  class="fa-icon fas fa-trash"></i>
+                <button class="btn-delete-photo ml-auto transition">
+                  <i (click)="removeImage(image._id, image.url, $event); $event.stopPropagation();" *ngIf="authUserId == userId" class="fa-icon fas fa-trash"></i>
+                  <i (click)="toggleImageLike(image._id); $event.stopPropagation();" [ngClass]="{ active: userService.isLiked(authUserId, image?.likes) }" *ngIf="authUserId !== userId" class="fa-icon far fa-heart"></i>
                 </button>
               </div>
               <div  class="overlay-bottom">

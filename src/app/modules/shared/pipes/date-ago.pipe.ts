@@ -14,12 +14,12 @@ export class DateAgoPipe implements PipeTransform {
     const diffHrs = Math.floor((diffMs % 86400000) / 3600000);
     const diffMins = Math.floor(((diffMs % 86400000) % 3600000) / 60000);
 
-    let result = diffMins ? `${diffMins} minute${this.getSuffix(diffMins)} ago` : 'just now';
-    result = diffHrs ? `${diffHrs} hour${this.getSuffix(diffHrs)} ago` : result;
-    result = diffDays ? `${diffDays} day${this.getSuffix(diffDays)} ago` : result;
-    result = diffWeeks ? `${diffWeeks} week${this.getSuffix(diffWeeks)} ago` : result;
-    result = diffMonths ? `${diffMonths} month${this.getSuffix(diffMonths)} ago` : result;
-    result = diffYears ? `${diffYears} year${this.getSuffix(diffYears)} ago` : result;
+    let result = diffMins ? `a ${diffMins} minute${this.getSuffix(diffMins)} ago` : 'less than a minute ago';
+    result = diffHrs ? `a ${diffHrs} hour${this.getSuffix(diffHrs)} ago` : result;
+    result = diffDays ? `a ${diffDays} day${this.getSuffix(diffDays)} ago` : result;
+    result = diffWeeks ? `a ${diffWeeks} week${this.getSuffix(diffWeeks)} ago` : result;
+    result = diffMonths ? `a ${diffMonths} month${this.getSuffix(diffMonths)} ago` : result;
+    result = diffYears ? `a ${diffYears} year${this.getSuffix(diffYears)} ago` : result;
 
     return result;
   }

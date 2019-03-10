@@ -36,7 +36,7 @@ export class UserProfileImagesComponent implements OnInit {
    */
   public getImages() {
     this.userService.getUserImages(this.userId).subscribe(
-    (images: Image[]) => {
+    (images: Array<Image>) => {
       this.images = images;
     });
   }
@@ -50,15 +50,36 @@ export class UserProfileImagesComponent implements OnInit {
     this.photoViewModalIsOpened = true;
   }
 
+  /**
+   * Удалить изображение
+   * @param imageId - идентификатор изображения
+   * @param imageUrl - адрес изображения
+   */
   public removeImage(imageId: string, imageUrl: string) {
     this.userService.removeUserImage(this.userId, imageId, imageUrl).subscribe(
-    (response: ServerResponse) => {
-      this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
-      if (!response.error) {
-        this.getImages();
-      }
-    },
-    (error) => this.messageService.add({severity: 'error', summary: 'Error Message:', detail: error.message})
+      (response: ServerResponse) => {
+        this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
+        if (!response.error) {
+          this.getImages();
+        }
+      },
+      (error) => this.messageService.add({severity: 'error', summary: 'Error Message:', detail: error.message})
+    );
+  }
+
+  /**
+   * Лайкнуть/дизлайкнуть изображение
+   * @param imageId - идентификатор изображения
+   */
+  public toggleImageLike(imageId: string) {
+    this.userService.toggleImageLike(imageId).subscribe(
+      (response: ServerResponse) => {
+        this.messageService.add({severity: response.error ? 'error' : 'success', summary: 'Message:', detail: response.message});
+        if (!response.error) {
+          this.getImages();
+        }
+      },
+      (error) => this.messageService.add({severity: 'error', summary: 'Error Message:', detail: error.message})
     );
   }
 }
