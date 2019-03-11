@@ -169,9 +169,9 @@ button {
   border: none;
 }
 
-img {
+/* img {
   min-width: 100%;
-}
+} */
 
 ul {
   list-style: none;
@@ -277,6 +277,13 @@ textarea.form-control {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.cover-btn {
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,.65);
 }
 
 div {
@@ -466,7 +473,8 @@ body .ui-overlaypanel .ui-overlaypanel-content {
   color: #000;
 }
 
-.ui-overlaypanel:after, .ui-overlaypanel:before {
+.ui-overlaypanel:after, 
+.ui-overlaypanel:before {
   bottom: 100%;
   left: 1.25em;
   border: none;

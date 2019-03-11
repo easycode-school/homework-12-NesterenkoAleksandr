@@ -109,4 +109,16 @@ export class UserService {
     }
     return likes.some(userId => userId === authUserId);
   }
+
+  /**
+   * Загрузить обложку на профиль пользователя
+   * @param userId - идентификатор авторизованого пользователя
+   * @param file - файл изображения
+   */
+  public uploadCover(userId: string, file: any): Observable<ServerResponse> {
+    const formData = new FormData();
+    formData.append('coverImg', file);
+
+    return this.http.post<ServerResponse>(`${this.apiUrl}/public/users/upload-cover/${userId}`, formData);
+  }
 }
