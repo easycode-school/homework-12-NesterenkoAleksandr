@@ -4,6 +4,8 @@ import { environment } from './../../../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { OnLoginAnswer } from './../interfaces/OnLoginAnswer';
+import { User } from '../interfaces/User';
+import { ServerResponse } from '../../../interfaces/server-response';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +49,19 @@ export class AuthService {
     localStorage.removeItem('mlp_client_id');
     localStorage.removeItem('mlp_client_token');
     return  of(true);
+  }
+
+  /**
+   * Регистрация нового пользователя
+   * @param user - данные для регистрации нового пользователя
+   */
+  public signUp(user: User): Observable<ServerResponse> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
+    };
+
+    return this.http.post<ServerResponse>(`${this.apiUrl}/public/auth/signup`, user, httpOptions);
   }
 }
