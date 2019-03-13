@@ -496,4 +496,8 @@ input::placeholder {
   pointer-events: none;
 }
 
+.ui-overlaypanel.ui-widget.ui-widget-content.ui-corner-all {
+  height: auto;
+}
+
 
